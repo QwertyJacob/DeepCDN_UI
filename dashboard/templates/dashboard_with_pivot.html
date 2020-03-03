@@ -9,9 +9,11 @@
 </head>
 <body>
 
-<div id="pivot-table-container" data-url="{% url 'pivot_data' %}"></div>
+<div id="pivot-table-container" data-url="{% url 'msg_data' %}"></div>
 <div id="pivot-chart-container"></div>
 <script>
+
+
         function processData(dataset) {
             var result = [];
             dataset = JSON.parse(dataset);
@@ -21,7 +23,7 @@
          $.ajax({
             url: $("#pivot-table-container").attr("data-url"),
             dataType: 'json',
-            success: function(data) {
+            success: function(dataw) {
                 new Flexmonster({
                     container: "#pivot-table-container",
                     componentFolder: "https://cdn.flexmonster.com/",
@@ -31,25 +33,7 @@
                     report: {
                         dataSource: {
                             type: "json",
-                            data: processData(data),
-                            mapping: {
-                                "product_category": {
-                                    "caption": "Product Category",
-                                    "type": "string"
-                                },
-                                "payment_method": {
-                                    "caption": "Payment Method",
-                                    "type": "string"
-                                },
-                                "shipping_cost": {
-                                    "caption": "Shipping Cost",
-                                    "type": "number"
-                                },
-                                "unit_price": {
-                                    "caption": "Unit Price",
-                                    "type": "number"
-                                }
-                            }
+                            data: dataw
                         },
                         slice: {}
                     }
@@ -63,7 +47,7 @@
                     report: {
                         dataSource: {
                             type: "json",
-                            data: processData(data)
+                            data: dataw
                         },
                         slice: {},
                         "options": {
